@@ -85,7 +85,7 @@ const EventUpdateForm = ({handleUpdateEvent, event}) => {
                 <CustomInput type="text" name="time" value={updatedEvent.time} onChange={handleChange} onBlur={handleBlur}/>
                 <p style={{color:'red'}}>{(errors.time != '' && blurs.time) && errors.time}</p>
             </div>
-            <CustomButton size='sm'>Update</CustomButton>
+            <CustomButton disabled={hasError} size='sm'>Update</CustomButton>
         </CustomForm>
     )
 }

@@ -1,7 +1,9 @@
+import CustomButton from "../ui/CustomButton";
+
 const UserButton = () => {
     return (
         <div>
-            <button>Edit</button>
+            <CustomButton>Edit</CustomButton>
         </div>
     )
 }

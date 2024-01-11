@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import CustomButton from "../ui/CustomButton";
 
-const UserClock = () => {
+const UserClock = ({updateUserZone}) => {
 
     const [userTimezone, setUserTimezone] = useState('Asia/Dhaka');
     const [zonedDate, setZonedDate] = useState(new Date().toLocaleString('en-US', { timeZone: userTimezone }));
@@ -11,6 +12,7 @@ const UserClock = () => {
     }
 
     const handleSaveChanges = () => {
+        updateUserZone(userTimezone);
         setEditMode(false);
     }
 
@@ -25,14 +27,14 @@ const UserClock = () => {
         }, 100);
 
         return () => clearInterval(interval);
-    }, [])
+    }, [zonedDate])
 
     return (
         <div>
-            <h3>Your Clock time is - </h3>
+            <h3>Your Clock time</h3>
             <p>{userTimezone}</p>
             <p>{zonedDate}</p>
-            <button disabled={editMode} onClick={handleEditMode}>Edit</button>
+            <CustomButton disabled={editMode} onClick={handleEditMode}>Edit</CustomButton>
             {
                 editMode && (
                     <div>
@@ -46,7 +48,7 @@ const UserClock = () => {
                                 })
                             }
                         </select>
-                        <button onClick={handleSaveChanges}>Save Changes</button>
+                        <CustomButton size='sm' onClick={handleSaveChanges}>Save Changes</CustomButton>
                     </div>
                 )
             }

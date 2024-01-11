@@ -2,24 +2,18 @@ import { useState, useEffect } from "react";
 import Event from "../event/Event";
 import EventForm from "../event/EventForm";
 import ClockUpdateForm from "./ClockUpdateForm";
-
-
-function* generateID(){
-    let id = 0;
-    while(true){
-        yield id++;
-    }
-}
+import generateID from "../../utils/uniqueId";
+import CustomClientDiv from "../ui/CustomClientDiv";
+import CustomButton from "../ui/CustomButton";
 
 const getID = generateID();
-
 
 const Clock = ({updateClock, deleteClock,clockid, title, name, timezone}) => {
     const [clock, setClock] = useState({id: clockid, title: title, name: name, timezone: timezone, time: new Date().toLocaleString('en-US', { timeZone: timezone })});
     const [events, setEvents] = useState([]);
-    const [newEventGenerating, setNewEventGenerating] = useState(false);
     const [newEventId, setNewEventId] = useState(0);
     const [updatingClock, setUpdatingClock] = useState(false);
+    const [newEventGenerating, setNewEventGenerating] = useState(false);
 
     
     const handleAddEvent = (event) => {
@@ -76,22 +70,22 @@ const Clock = ({updateClock, deleteClock,clockid, title, name, timezone}) => {
 
 
     return (
-        <div>
-            <h3>{clock.title}</h3>
-            <p>{clock.id}</p>
+        <CustomClientDiv>
+            <h2>{clock.title}</h2>
+            {/* <p>{clock.id}</p> */}
             <p>{clock.name}</p>
             <p>{clock.timezone}</p>
             <p>{clock.time}</p>
 
-            <button onClick={handleUpdateClockGenerating}>Update Clock</button>
+            <CustomButton size='sm' onClick={handleUpdateClockGenerating}>Update Clock</CustomButton>
             {
                 updatingClock && (
                     <ClockUpdateForm handleUpdateClock={handleUpdateClock} clock={clock}/>
                 )
             }
-            <button onClick={handleDeleteClock}>Delete Clock</button>
+            <CustomButton size='sm' onClick={handleDeleteClock}>Delete Clock</CustomButton>
 
-            <button onClick={handleNewEventGenerating}>Add New Event</button>
+            <CustomButton size='sm' onClick={handleNewEventGenerating}>Add New Event</CustomButton>
             {
                 newEventGenerating && (
                     <EventForm addNewEvent={handleAddEvent} eventid={newEventId}/>
@@ -104,7 +98,7 @@ const Clock = ({updateClock, deleteClock,clockid, title, name, timezone}) => {
                     )
                 })
             }
-        </div>
+        </CustomClientDiv>
     )
 }
 

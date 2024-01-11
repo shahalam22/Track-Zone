@@ -1,4 +1,7 @@
 import { useState } from "react";
+import CustomButton from "../ui/CustomButton";
+import { CustomForm, CustomInput, CustomLabel } from "../ui/CustomForm";
+
 
 const init = {
     title: '',
@@ -24,17 +27,25 @@ const EventForm = ({addNewEvent, eventid}) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="title">Enter Title: </label>
-            <input type="text" name="title" id="title" onChange={handleInputChange}/>
-            <label htmlFor="description">Enter Description: </label>
-            <input type="text" name="description" id="description" onChange={handleInputChange}/>
-            <label htmlFor="date">Enter Date: </label>
-            <input type="date" name="date" id="date" onChange={handleInputChange}/>
-            <label htmlFor="time">Enter Time: </label>
-            <input type="time" name="time" id="time" onChange={handleInputChange}/>
-            <input type="submit" value="Save Event" />
-        </form>
+        <CustomForm onSubmit={handleSubmit}>
+            <div>
+                <CustomLabel htmlFor="title">Enter Title: </CustomLabel>
+                <CustomInput type="text" name="title" id="title" onChange={handleInputChange}/>
+            </div>
+            <div>
+                <CustomLabel htmlFor="description">Enter Description: </CustomLabel>
+                <CustomInput type="text" name="description" id="description" onChange={handleInputChange}/>
+            </div>
+            <div>
+                <CustomLabel htmlFor="date">Enter Date: </CustomLabel>
+                <CustomInput type="date" name="date" id="date" onChange={handleInputChange}/>
+            </div>
+            <div>
+                <CustomLabel htmlFor="time">Enter Time: </CustomLabel>
+                <CustomInput type="time" name="time" id="time" onChange={handleInputChange}/>
+            </div>
+            <CustomButton size='sm' type="submit">Save</CustomButton>
+        </CustomForm>
     )
 }
 

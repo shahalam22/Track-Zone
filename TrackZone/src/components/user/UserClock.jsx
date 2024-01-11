@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CustomButton from "../ui/CustomButton";
+import { CustomSelect } from "../ui/CustomForm";
 
 const UserClock = ({updateUserZone}) => {
 
@@ -39,7 +40,7 @@ const UserClock = ({updateUserZone}) => {
                 editMode && (
                     <div>
                         <p>Select Your TimeZone</p>
-                        <select name="timezone" id="timezone" onChange={handleTimezoneChange}>
+                        <CustomSelect name="timezone" id="timezone" onChange={handleTimezoneChange}>
                             {
                                 Intl.supportedValuesOf('timeZone').map((item, index) => {
                                     return (
@@ -47,7 +48,7 @@ const UserClock = ({updateUserZone}) => {
                                     )
                                 })
                             }
-                        </select>
+                        </CustomSelect>
                         <CustomButton size='sm' onClick={handleSaveChanges}>Save Changes</CustomButton>
                     </div>
                 )

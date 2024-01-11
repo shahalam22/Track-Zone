@@ -3,7 +3,7 @@ import UserClock from './components/user/UserClock';
 import ClockForm from './components/Client/ClockForm';
 import Clock from './components/Client/Clock';
 import generateID from './utils/uniqueId';
-import CustomDiv from './components/ui/CustomDiv';
+import {CustomDiv} from './components/ui/CustomDiv';
 import CustomButton from './components/ui/CustomButton';
 
 const getID = generateID();

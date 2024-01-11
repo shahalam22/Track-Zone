@@ -24,7 +24,7 @@ const Event = ({updateEvent, deleteEvent, eventid, title, description, date, tim
     return (
         <CustomEventDiv>
             <h4>{event.title}</h4>
-            <p>{event.eventid}</p>
+            {/* <p>{event.eventid}</p> */}
             <p>{event.description}</p>
             <p>{event.date}</p>
             <p>{event.time}</p>

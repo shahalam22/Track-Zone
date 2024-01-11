@@ -16,6 +16,7 @@ const CustomButton = styled.button`
     outline: none;
     cursor: pointer;
     font-size: ${(props => fontSizes[props.size] ?? fontSizes.md)};
+    cursor: ${(props => props.disabled ? 'not-allowed' : 'pointer')};
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;
 

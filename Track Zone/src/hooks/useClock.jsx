@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
-import { addMinutes } from "date-fns"
+import { addMinutes } from "date-fns";
+import { TIMEZONE_OFFSET } from "../constants/timezone";
 
-
-const TIMEZONE_OFFSET = {
-    PST: -8*60,
-    EST: -5*60,
-    EDT: -4*60,
-    BST: 1*60,
-    MST: -6*60
-}
 
 const useCLock = (timezone, offset) => {    // user date, user timezone that is which type of time he wants e.g.(UTC, GMT, PST, EST) & offset
     const [localDate, setLocalDate] = useState(null);

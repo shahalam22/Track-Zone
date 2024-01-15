@@ -48,7 +48,7 @@ const App = () => {
     return (
         <div>
             <LocalClock clock={localClock} updateClock={updateLocalClock} createClock={createClock}/>
-            <ClockList clocks={clocks} updateClock={updateClock} deleteClock={deleteClock}/>
+            <ClockList localClock = {localClock.date} clocks={clocks} updateClock={updateClock} deleteClock={deleteClock}/>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import ClockListItem from "./ClockListItem";
 
-const ClockList = ({clocks, updateClock, deleteClock}) => {
+const ClockList = ({clocks, updateClock, deleteClock, localClock}) => {
     return (
         <div>
             <h3>Other Clocks</h3>
@@ -9,7 +9,7 @@ const ClockList = ({clocks, updateClock, deleteClock}) => {
             ) : (
                 <ul>
                     {clocks.map(clock => (
-                        <ClockListItem key={clock.id} clock={clock} updateClock={updateClock} deleteClock={deleteClock}/>
+                        <ClockListItem key={clock.id} localClock={localClock} clock={clock} updateClock={updateClock} deleteClock={deleteClock}/>
                     ))}
                 </ul>
             )}

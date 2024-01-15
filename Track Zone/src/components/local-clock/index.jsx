@@ -4,7 +4,7 @@ import useCLock from "../../hooks/useClock";
 import { useEffect } from "react";
 
 
-const LocalClock = ({clock, updateClock}) => {
+const LocalClock = ({clock, updateClock, createClock}) => {
     const {date, timezone, offset} = useCLock(clock.timezone, clock.offset);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const LocalClock = ({clock, updateClock}) => {
     return (
         <div>
             {date && <ClockDisplay date={date} title={clock.title} timezone={timezone} offset={offset}/>}
-            <ClockActions local={true} clock={clock} updateClock={updateClock}/>
+            <ClockActions local={true} clock={clock} updateClock={updateClock} createClock={createClock}/>
         </div>
     );
 };

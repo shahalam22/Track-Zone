@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { generate } from "shortid";
 import LocalClock from "./components/local-clock";
 import ClockList from "./components/clock-list";
-import useCLock from "./hooks/useClock";
-import useEvents from "./hooks/useEvents";
 
 
 const LOCAL_CLOCK_INIT = {
@@ -16,26 +14,7 @@ const LOCAL_CLOCK_INIT = {
 const App = () => {
     const [localClock, setLocalClock] = useState({ ...LOCAL_CLOCK_INIT });
     const [clocks, setClocks] = useState([]);
-
-    
-
-    const {getEvents, getEventByClockId, addEvent, deleteEvent, updateEvent, events} = useEvents();
-
-    useEffect(() => {
-        
-        if(Object.keys(events).length === 0) {
-            addEvent({title : 'test', clockId: '1'});
-        }
-
-        console.log('All events: ', getEvents());
-        console.log('All events array: ', getEvents(true));
-        console.log('Event by id: ', getEventByClockId('1', true));
-
-    }, [events])
-
-
-
-    // console.log(localClock.date);
+    const [events, setEvents] = useState([]);
 
     const updateLocalClock = (data) => {
         setLocalClock({
@@ -49,6 +28,11 @@ const App = () => {
         setClocks([...clocks, clock]);
     }
 
+    const createEvent = (event) => {
+        event.id = generate();
+        setEvents([...events, event]);
+    }
+
     const updateClock = (updatedClock) => {
         const updatedClocks = clocks.map(clock => {
             if(clock.id === updatedClock.id) {
@@ -59,15 +43,33 @@ const App = () => {
         setClocks(updatedClocks);
     }
 
+    const updateEvent = (updatedEvent) => {
+        const updatedEvents = events.map(event => {
+            if(event.id === updatedEvent.id) {
+                return updatedEvent;
+            }else{
+                return event;
+            }
+        })
+        setEvents(updatedEvents);
+    }
+
     const deleteClock = (id) => {
         const updatedClocks = clocks.filter(clock => clock.id !== id);
         setClocks(updatedClocks);
     }
 
+    const deleteEvent = (id) => {
+        const updatedEvents = events.filter(event => event.id !== id);
+        setEvents(updatedEvents);
+    }
+
+    
+
     return (
         <div>
             <LocalClock clock={localClock} updateClock={updateLocalClock} createClock={createClock}/>
-            <ClockList localClock = {localClock.date} clocks={clocks} updateClock={updateClock} deleteClock={deleteClock}/>
+            <ClockList localClock = {localClock.date} clocks={clocks} updateClock={updateClock} deleteClock={deleteClock} events={events} createEvent={createEvent} updateEvent={updateEvent} deleteEvent={deleteEvent}/>
         </div>
     )
 }

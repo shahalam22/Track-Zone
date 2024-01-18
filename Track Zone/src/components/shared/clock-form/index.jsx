@@ -2,19 +2,16 @@ import { useEffect, useState } from "react";
 import { getOffset } from "../../../utils/timezone";
 import { TIMEZONE_OFFSET } from "../../../constants/timezone";
 
+const init = {
+    title: '',
+    timezone: 'GMT', 
+    offset: ''
+}
 
-const ClockForm = ({ values = {title: '', timezone: 'GMT', offset: ''}, handleClock, title=true, edit=false }) => {
+const ClockForm = ({ values = {...init}, handleClock, title=true, edit=false, updateView }) => {
 
     const [formValues, setFormValues] = useState({...values});
 
-    useEffect(() => {
-        if(TIMEZONE_OFFSET[formValues.timezone]){
-            setFormValues(prev => ({
-                ...prev,
-                offset: TIMEZONE_OFFSET[formValues.timezone]
-            }));
-        }
-    }, [formValues.timezone])
 
     const handleChange = (e) => {
         let { name, value } = e.target;
@@ -30,6 +27,8 @@ const ClockForm = ({ values = {title: '', timezone: 'GMT', offset: ''}, handleCl
     const handleSubmit = (e) => {
         e.preventDefault();
         handleClock(formValues);
+        setFormValues({...init});
+        updateView();
     }
 
     return (

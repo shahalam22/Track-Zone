@@ -6,8 +6,12 @@ const ClockActions = ({local = false, clock, updateClock, createClock, deleteClo
     const [isEdit, setIsEdit] = useState(false);
     const [isCreate, setIsCreate] = useState(false);
 
-    const handleClock = (values) => {
-        createClock(values);
+    const updateIsCreate = () => {
+        setIsCreate(false);
+    }
+
+    const updateIsEdit = () => {
+        setIsEdit(false);
     }
 
     return (
@@ -18,7 +22,7 @@ const ClockActions = ({local = false, clock, updateClock, createClock, deleteClo
                 isEdit && (
                     <>
                         <h3>Edit Clock</h3>
-                        <ClockForm values={clock} handleClock={updateClock} title={!local} edit={true}/>
+                        <ClockForm values={clock} handleClock={updateClock} title={!local} edit={true} updateView={updateIsEdit}/>
                     </>
                 )
             }
@@ -26,7 +30,7 @@ const ClockActions = ({local = false, clock, updateClock, createClock, deleteClo
                 isCreate && (
                     <>
                         <h3>Create a new Clock</h3>
-                        <ClockForm handleClock={handleClock}/>
+                        <ClockForm handleClock={createClock} updateView={updateIsCreate}/>
                     </>
                 )
             }

@@ -12,7 +12,7 @@ const ClockDisplay = ({title, date, timezone, offset}) => {
                 <h3>{ format(date, "dd-MM-yyyy hh:mm:ss aaaaa'm'") }</h3>
                 <p>
                     { timezone }
-                    { offsetHrs > 0 ? `+${Math.abs(offsetHrs)}` : `-${Math.abs(offsetHrs)}` }
+                    { (timezone === 'GMT' || timezone === 'UTC') && (offsetHrs > 0 ? `+${Math.abs(offsetHrs)}` : `-${Math.abs(offsetHrs)}`) }
                 </p>
             </div>
     );

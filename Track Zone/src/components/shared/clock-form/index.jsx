@@ -39,7 +39,7 @@ const ClockForm = ({ values = {...init}, handleClock, title=true, edit=false, up
             </div>
             <div>
                 <label htmlFor="timezone">Enter Timezone </label>
-                <select name="timezone" value={formValues.timezone} onChange={handleChange}>
+                <select name="timezone" id="timezone" value={formValues.timezone} onChange={handleChange}>
                     <option value="GMT">GMT</option>
                     <option value="UTC">UTC</option>
                     <option value="PST">PST</option>

@@ -58,7 +58,9 @@ const ClockForm = ({addNewClock, clockID}) => {
 
     useEffect(() => {
         errorUpdate();
+        console.log(hasError);
     },[clock])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();

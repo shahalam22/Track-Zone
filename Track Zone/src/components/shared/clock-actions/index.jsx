@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ClockForm from "../clock-form";
+import { CustomButton, CustomH3 } from "../../ui/components";
 
 
 const ClockActions = ({local = false, clock, updateClock, createClock, deleteClock}) => {
@@ -16,12 +17,12 @@ const ClockActions = ({local = false, clock, updateClock, createClock, deleteClo
 
     return (
         <div>
-            <button onClick={() => setIsEdit(!isEdit)}>Edit</button>
-            { local ? <button onClick={() => setIsCreate(!isCreate)}>Create</button> : <button onClick={() => deleteClock(clock.id)}>Delete</button>}
+            <CustomButton onClick={() => setIsEdit(!isEdit)}>Edit</CustomButton>
+            { local ? <CustomButton onClick={() => setIsCreate(!isCreate)}>Create</CustomButton> : <CustomButton onClick={() => deleteClock(clock.id)}>Delete</CustomButton>}
             {
                 isEdit && (
                     <>
-                        <h3>Edit Clock</h3>
+                        <CustomH3>Edit Clock</CustomH3>
                         <ClockForm values={clock} handleClock={updateClock} title={!local} edit={true} updateView={updateIsEdit}/>
                     </>
                 )
@@ -29,7 +30,7 @@ const ClockActions = ({local = false, clock, updateClock, createClock, deleteClo
             {
                 isCreate && (
                     <>
-                        <h3>Create a new Clock</h3>
+                        <CustomH3>Create a new Clock</CustomH3>
                         <ClockForm handleClock={createClock} updateView={updateIsCreate}/>
                     </>
                 )
@@ -39,26 +40,3 @@ const ClockActions = ({local = false, clock, updateClock, createClock, deleteClo
 }
 
 export default ClockActions;
-
-/*
-
-<div>
-    <input type="text" name="title" value={clock.title} onChange={handleChange}/>
-    <select name="timezone" value={clock.timezone} onChange={handleChange}>
-        <option value="GMT">GMT</option>
-        <option value="UTC">UTC</option>
-        <option value="PST">PST</option>
-        <option value="EST">EST</option>
-        <option value="BST">BST</option>
-        <option value="MST">MST</option>
-    </select>
-    {(clock.timezone === 'GMT' || clock.timezone === 'UTC') && (
-        <select name="offset" value={clock.offset/60} onChange={handleChange}>
-            {defaultOffsets.map(offset => (
-                <option key={offset} value={offset}>{ offset }</option>
-            ))}        
-        </select>
-    )}
-</div>
-
-*/

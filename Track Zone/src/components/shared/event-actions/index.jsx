@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EventForm from "../event-form/index";
+import { CustomButton, CustomH3 } from "../../ui/components";
 
 const EventActions = ({insideClock = false ,event, updateEvent, deleteEvent, createEventbyClock}) => {
 
@@ -17,12 +18,12 @@ const EventActions = ({insideClock = false ,event, updateEvent, deleteEvent, cre
 
     return (
         <div>
-            {!insideClock && <button onClick={() => setIsEdit(true)}>Edit</button>}
-            {insideClock ?<button onClick={() => setIsCreate(true)}>Create</button> : <button onClick={() => deleteEvent(event.id)}>Delete</button>}
+            {!insideClock && <CustomButton onClick={() => setIsEdit(true)}>Edit</CustomButton>}
+            {insideClock ?<CustomButton onClick={() => setIsCreate(true)}>Create New Event</CustomButton> : <CustomButton onClick={() => deleteEvent(event.id)}>Delete</CustomButton>}
             {
                 isEdit && (
                     <>
-                        <h3>Edit Event</h3>
+                        <CustomH3>Edit Event</CustomH3>
                         <EventForm values={event} handleOperation={updateEvent} edit={true} updateView={updateIsEdit}/>
                     </>
                 )
@@ -30,7 +31,7 @@ const EventActions = ({insideClock = false ,event, updateEvent, deleteEvent, cre
             {
                 isCreate && (
                     <>
-                        <h3>Create a new Event</h3>
+                        <CustomH3>Create a new Event</CustomH3>
                         <EventForm handleOperation={createEventbyClock} updateView={updateIsCreate}/>
                     </>
                 )

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getOffset } from "../../../utils/timezone";
-import { TIMEZONE_OFFSET } from "../../../constants/timezone";
+import { CustomFormDiv, CustomButton, CustomInput, CustomSelect } from "../../ui/components";
 
 const init = {
     title: '',
@@ -71,40 +71,41 @@ const ClockForm = ({ values = {...init}, handleClock, title=true, edit=false, up
     }, [formValues])
     
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="title">Enter Title</label>
-                <input type="text" id="title" name="title" value={formValues.title} onChange={handleChange} disabled={!title} onBlur={handleBlur}/>
-                <p style={{color:'red'}}>{(errors.title != '' && blurs.title) && errors.title}</p>
-            </div>
-            <div>
-                <label htmlFor="timezone">Enter Timezone </label>
-                <select name="timezone" id="timezone" value={formValues.timezone} onChange={handleChange} onBlur={handleBlur}>
-                    <option value="GMT">GMT</option>
-                    <option value="UTC">UTC</option>
-                    <option value="PST">PST</option>
-                    <option value="EST">EST</option>
-                    <option value="BST">BST</option>
-                    <option value="MST">MST</option>
-                </select>
-                <p style={{color:'red'}}>{(errors.timezone != '' && blurs.timezone) && errors.timezone}</p>
-            </div>
-            <div>
-                {(formValues.timezone === 'GMT' || formValues.timezone === 'UTC') && (
-                    <div>
-                        <label htmlFor="offset">Enter Offset </label>
-                        <select id="offset" name="offset" value={formValues.offset/60} onChange={handleChange} onBlur={handleBlur}>
-                            {getOffset().map(offset => (
-                                <option key={offset} value={offset}>{ offset }</option>
-                            ))}        
-                        </select>
-                        <p style={{color:'red'}}>{(errors.offset != '' && blurs.offset) && errors.offset}</p>
-                    </div>
-                )}
-            </div>
-
-            <button disabled={hasError}>{edit ? "Update" : "Create"}</button>
-        </form>
+        <CustomFormDiv>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="title">Enter Title : </label>
+                    <CustomInput type="text" id="title" name="title" value={formValues.title} onChange={handleChange} disabled={!title} onBlur={handleBlur}/>
+                    <p style={{color:'red'}}>{(errors.title != '' && blurs.title) && errors.title}</p>
+                </div>
+                <div>
+                    <label htmlFor="timezone">Enter Timezone : </label>
+                    <CustomSelect name="timezone" id="timezone" value={formValues.timezone} onChange={handleChange} onBlur={handleBlur}>
+                        <option value="GMT">GMT</option>
+                        <option value="UTC">UTC</option>
+                        <option value="PST">PST</option>
+                        <option value="EST">EST</option>
+                        <option value="BST">BST</option>
+                        <option value="MST">MST</option>
+                    </CustomSelect>
+                    <p style={{color:'red'}}>{(errors.timezone != '' && blurs.timezone) && errors.timezone}</p>
+                </div>
+                <div>
+                    {(formValues.timezone === 'GMT' || formValues.timezone === 'UTC') && (
+                        <div>
+                            <label htmlFor="offset">Enter Offset : </label>
+                            <CustomSelect id="offset" name="offset" value={formValues.offset/60} onChange={handleChange} onBlur={handleBlur}>
+                                {getOffset().map(offset => (
+                                    <option key={offset} value={offset}>{ offset }</option>
+                                ))}        
+                            </CustomSelect>
+                            <p style={{color:'red'}}>{(errors.offset != '' && blurs.offset) && errors.offset}</p>
+                        </div>
+                    )}
+                </div>
+                <CustomButton disabled={hasError}>{edit ? "Update" : "Create"}</CustomButton>
+            </form>
+        </CustomFormDiv>
     )
 }
 

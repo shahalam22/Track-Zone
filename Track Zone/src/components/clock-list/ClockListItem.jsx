@@ -5,6 +5,7 @@ import ClockDisplay from "../shared/clock-display";
 import useTimer from "../../hooks/useTimer";
 import EventList from "../event-list";
 import EventActions from "../shared/event-actions";
+import { CustomClockListItemDiv } from "../ui/components";
 
 
 const ClockListItem = ({clock, updateClock, deleteClock, localClock, events, createEvent, updateEvent, deleteEvent}) => {
@@ -19,7 +20,7 @@ const ClockListItem = ({clock, updateClock, deleteClock, localClock, events, cre
     }
 
     return(
-        <div>
+        <CustomClockListItemDiv>
             <ClockDisplay
                 date = {timer}
                 title = {clock.title}
@@ -38,13 +39,13 @@ const ClockListItem = ({clock, updateClock, deleteClock, localClock, events, cre
                 <EventActions insideClock={true} createEventbyClock={createEventbyClock}/>
                 {
                     events.length === 0 ? (
-                        <h3>No events found</h3>
+                        <p>No events found</p>
                     ):(
                         <EventList events={events} updateEvent={updateEvent} deleteEvent={deleteEvent} />
                     )
                 }
             </div>
-        </div>
+        </CustomClockListItemDiv>
     )
 }
 

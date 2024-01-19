@@ -1,55 +1,80 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { generate } from "shortid";
 
 
-const App = () => {
-    const [userZone, setUserZone] = useState('Asia/Dhaka');
+const LOCAL_CLOCK_INIT = {
+    title: 'My Clock',
+    timezone: '',
+    offset: 0,
+    date: null,
+};
+
+const useApp = () => {
+    const [localClock, setLocalClock] = useState({ ...LOCAL_CLOCK_INIT });
     const [clocks, setClocks] = useState([]);
-    const [newClockGenerating, setNewClockGenerating] = useState(false);
+    const [events, setEvents] = useState([]);
 
-    // Adding new clock function
-    const addNewClock = (clock) => {
-        setClocks([clock, ...clocks]);
-        setNewClockGenerating(false);
+    const updateLocalClock = (data) => {
+        setLocalClock({
+            ...localClock,
+            ...data
+        })
     }
 
-    // Function to handle new clock generating
-    const handleNewClockGenerating = () => {
-        setNewClockGenerating(true);
+    const createClock = (clock) => {
+        clock.id = generate();
+        setClocks([...clocks, clock]);
     }
 
-    // Update User Zone
-    const updateUserZone = (zone) => {
-        setUserZone(zone);
-    }
-    
-    // Clock deleting function
-    const deleteClock = (id) => {
-        setClocks(clocks.filter((item) => item.clockid !== id));
+    const createEvent = (event) => {
+        event.id = generate();
+        setEvents([...events, event]);
     }
 
-    // Clock updating function
-    const updateClock = (id, updatedClock) => {
-        const updatedClocks = clocks.map((item) => {
-            return item.clockid === id ? {
-                ...item,
-                title: updatedClock.title,
-                name: updatedClock.name,
-                timezone: updatedClock.timezone
-            } : item;
-        });
+    const updateClock = (updatedClock) => {
+        const updatedClocks = clocks.map(clock => {
+            if(clock.id === updatedClock.id) {
+                return updatedClock;
+            }else 
+                return clock;
+        })
         setClocks(updatedClocks);
     }
 
+    const updateEvent = (updatedEvent) => {
+        const updatedEvents = events.map(event => {
+            if(event.id === updatedEvent.id) {
+                return updatedEvent;
+            }else{
+                return event;
+            }
+        })
+        setEvents(updatedEvents);
+    }
+
+    const deleteClock = (id) => {
+        const updatedClocks = clocks.filter(clock => clock.id !== id);
+        setClocks(updatedClocks);
+    }
+
+    const deleteEvent = (id) => {
+        const updatedEvents = events.filter(event => event.id !== id);
+        setEvents(updatedEvents);
+    }
+
     return {
-        userZone,
+        localClock,
         clocks,
-        newClockGenerating,
-        addNewClock,
-        handleNewClockGenerating,  
-        updateUserZone,
+        events,
+        updateLocalClock,
+        createClock,
+        createEvent,
+        updateClock,
+        updateEvent,
         deleteClock,
-        updateClock
+        deleteEvent,
+        
     }
 }
 
-export default App;
+export default useApp;

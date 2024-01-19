@@ -7,6 +7,7 @@ const init = {
 
 import { useEffect } from "react";
 import { useState } from "react";
+import { CustomButton, CustomFormDiv, CustomInput } from "../../ui/components";
 
 const EventForm = ({
         values = {clockId: '', title: '', description: '', time: '', date: ''}, 
@@ -78,30 +79,32 @@ const EventForm = ({
     }, [eventValues])
     
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="title">Enter Event Title</label>
-                <input type="text" id="title" name="title" value={eventValues.title} onChange={handleChange} onBlur={handleBlur}/>
-                <p style={{color:'red'}}>{(errors.title != '' && blurs.title) && errors.title}</p>
-            </div>
-            <div>
-                <label htmlFor="description">Enter Event Description</label>
-                <input type="text" name="description" id="description" value={eventValues.description} onChange={handleChange} onBlur={handleBlur}/>
-                <p style={{color:'red'}}>{(errors.description != '' && blurs.description) && errors.description}</p>
-            </div>
-            <div>
-                <label htmlFor="time">Enter Event Time</label>
-                <input type="time" name="time" id="time" value={eventValues.time} onChange={handleChange} onBlur={handleBlur}/>
-                <p style={{color:'red'}}>{(errors.time != '' && blurs.time) && errors.time}</p>
-            </div>
-            <div>
-                <label htmlFor="date">Enter Event Date</label>
-                <input type="date" name="date" id="date" value={eventValues.date} onChange={handleChange} onBlur={handleBlur}/>
-                <p style={{color:'red'}}>{(errors.date != '' && blurs.date) && errors.date}</p>
-            </div>
-        
-            <button disabled={hasError}>{edit ? "Update" : "Create"}</button>
-        </form>
+        <CustomFormDiv>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="title">Enter Event Title : </label>
+                    <CustomInput type="text" id="title" name="title" value={eventValues.title} onChange={handleChange} onBlur={handleBlur}/>
+                    <p style={{color:'red'}}>{(errors.title != '' && blurs.title) && errors.title}</p>
+                </div>
+                <div>
+                    <label htmlFor="description">Enter Event Description : </label>
+                    <CustomInput type="text" name="description" id="description" value={eventValues.description} onChange={handleChange} onBlur={handleBlur}/>
+                    <p style={{color:'red'}}>{(errors.description != '' && blurs.description) && errors.description}</p>
+                </div>
+                <div>
+                    <label htmlFor="time">Enter Event Time : </label>
+                    <CustomInput type="time" name="time" id="time" value={eventValues.time} onChange={handleChange} onBlur={handleBlur}/>
+                    <p style={{color:'red'}}>{(errors.time != '' && blurs.time) && errors.time}</p>
+                </div>
+                <div>
+                    <label htmlFor="date">Enter Event Date : </label>
+                    <CustomInput type="date" name="date" id="date" value={eventValues.date} onChange={handleChange} onBlur={handleBlur}/>
+                    <p style={{color:'red'}}>{(errors.date != '' && blurs.date) && errors.date}</p>
+                </div>
+
+                <CustomButton disabled={hasError}>{edit ? "Update" : "Create"}</CustomButton>
+            </form>
+        </CustomFormDiv>
     )
 }
 

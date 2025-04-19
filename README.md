@@ -17,10 +17,9 @@ Track-Zone is a web application designed to assist developers and freelancers in
 
 | Component       | Technology                     |
 |-----------------|--------------------------------|
-| **Frontend**    | React.js (assumed)            |
-| **Backend**     | Node.js, Express.js (assumed) |
-| **Database**    | MongoDB (assumed)             |
-| **Other Tools** | Moment.js (for time handling), Axios (for API requests, if applicable) |
+| **Frontend**    | React.js            |
+| **Backend**     | Node.js, Express.js |
+| **Other Tools** | Axios (for API requests, if applicable) |
 
 ## Installation
 
